@@ -4,6 +4,12 @@
 
 import 'dart:convert';
 
+import 'package:intl/intl.dart';
+
+var now = new DateTime.now();
+var formatter = new DateFormat('yyyy');
+String formattedDate = formatter.format(now);
+
 MovieModel movieModelFromJson(String str) => MovieModel.fromJson(json.decode(str));
 
 String movieModelToJson(MovieModel data) => json.encode(data.toJson());
@@ -64,6 +70,7 @@ class Result {
   double popularity;
   String posterPath;
   DateTime releaseDate;
+  String year;
   String title;
   bool video;
   double voteAverage;
@@ -79,7 +86,7 @@ class Result {
     overview: json["overview"],
     popularity: json["popularity"].toDouble(),
     posterPath: json["poster_path"],
-    releaseDate: json["release_date"] == null ? null : DateTime.parse(json["release_date"]),
+    releaseDate: json["release_date"] == null ? DateTime.now() : DateTime.parse(json["release_date"]),
     title: json["title"],
     video: json["video"],
     voteAverage: json["vote_average"].toDouble(),

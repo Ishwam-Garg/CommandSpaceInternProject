@@ -7,7 +7,7 @@ import 'package:intl/intl.dart';
 
 class MoviesList extends StatefulWidget {
 
-  final int year;
+  final String year;
   MoviesList(this.year);
 
   @override
@@ -22,15 +22,15 @@ class _MoviesListState extends State<MoviesList> {
   void initState() {
     // TODO: implement initState
     super.initState();
-
-    _model = apiCall().getMovie(widget.year.toString());
+    print('the value passed is ' + widget.year);
+    _model = apiCall().getMovie();
   }
 
 
   @override
   Widget build(BuildContext context) {
     var now = new DateTime.now();
-    var formatter = new DateFormat('yyyy-MM-dd');
+    var formatter = new DateFormat('yyyy');
     String formattedDate = formatter.format(now);
     return Scaffold(
       appBar: AppBar(
@@ -45,16 +45,16 @@ class _MoviesListState extends State<MoviesList> {
               return ListView.builder(
                   itemCount: snapshot.data.results.length,
                   itemBuilder: (context,index){
-                      try{
+                      try {
 
                         var sorted = snapshot.data.results;
                         sorted.sort((a,b)=>a.popularity.compareTo(b.popularity));
                         //var data = snapshot.data.results[index];
                         var data = sorted[index];
-                        int year_p = int.parse(data.releaseDate.toString().split("-")[0]);
+                        var toSearch = widget.year;
+                        var search = data.releaseDate.year.toString();
 
-
-                        if(now.isAfter(data.releaseDate))
+                        if(true)
                         {
                           print(true);
                           return GestureDetector(
@@ -125,7 +125,7 @@ class _MoviesListState extends State<MoviesList> {
                       }
                       catch(e)
                     {
-                      print(e.toString());
+                      print("Error is" + e.toString());
                       return Container();
                     }
 

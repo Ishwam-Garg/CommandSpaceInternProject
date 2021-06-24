@@ -12,7 +12,7 @@ class _YearSelectScreenState extends State<YearSelectScreen> {
 
   final _formkey = GlobalKey<FormState>();
 
-  int year;
+  String year;
 
   @override
   Widget build(BuildContext context) {
@@ -47,12 +47,12 @@ class _YearSelectScreenState extends State<YearSelectScreen> {
                         alignLabelWithHint: true,
                       ),
                     onSaved: (value){
-                        year = int.parse(value.toString());
+                        year = value;
                     },
                     onChanged: (value){
-                        year = int.parse(value.toString());
+                        year = value;
                     },
-                    validator: (value){
+                    validator: (value) {
 
                         if(int.parse(value.toString()) <= 0)
                           {

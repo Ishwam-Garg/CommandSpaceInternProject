@@ -3,7 +3,7 @@ import 'package:http/http.dart' as http;
 import 'package:commandspace_internproject/Constants/Strings/Strings.dart';
 class apiCall{
 
-  Future<MovieModel> getMovie(String year) async{
+  Future<MovieModel> getMovie() async{
 
     var url = Uri.parse(Strings().movieApi);
 
